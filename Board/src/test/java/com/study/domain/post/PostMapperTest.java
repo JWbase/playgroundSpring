@@ -1,5 +1,6 @@
 package com.study.domain.post;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,7 @@ class PostMapperTest {
 
     @Test
     @Transactional
+    @DisplayName("게시글 작성")
     public void save() throws Exception {
 
         //given
@@ -34,6 +36,7 @@ class PostMapperTest {
     }
 
     @Test
+    @DisplayName("게시글 조회")
     public void findById() throws Exception {
         //given
         //when
@@ -44,6 +47,7 @@ class PostMapperTest {
     
     @Test
     @Transactional
+    @DisplayName("게시글 수정")
     public void update() throws Exception {
         //given
         PostRequest updateParams = new PostRequest();
@@ -64,6 +68,7 @@ class PostMapperTest {
     
     @Test
     @Transactional
+    @DisplayName("게시글 삭제")
     public void delete() throws Exception {
         //given
         //when
