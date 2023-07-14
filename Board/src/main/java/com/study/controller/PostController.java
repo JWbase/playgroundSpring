@@ -35,7 +35,7 @@ public class PostController {
     @PostMapping("/write")
     public String postWrite(final PostRequest params) {
         postService.savePost(params);
-        return "redirect:/post/posts";
+        return "redirect:/post/postList";
     }
 
     // 게시판 리스트
@@ -43,7 +43,7 @@ public class PostController {
     public String postList(Model model) {
         List<PostResponse> posts = postService.findAllPost();
         model.addAttribute("posts", posts);
-        return "post/posts";
+        return "post/postList";
     }
 
     // 게시판 상세
@@ -58,14 +58,14 @@ public class PostController {
     @PostMapping("/update")
     public String updatePost(final PostRequest params) {
         postService.updatePost(params);
-        return "redirect:/post/posts";
+        return "redirect:/post/postList";
     }
 
     // 게시글 삭제
     @PostMapping("/delete")
     public String deletePost(@RequestParam final Long id) {
         postService.deletePost(id);
-        return "redirect:/post/posts";
+        return "redirect:/post/postList";
     }
 
 }
