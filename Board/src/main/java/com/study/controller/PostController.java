@@ -1,16 +1,14 @@
 package com.study.controller;
 
 
+import com.study.common.MessageDto;
 import com.study.domain.post.PostRequest;
 import com.study.domain.post.PostResponse;
 import com.study.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,9 +31,10 @@ public class PostController {
 
     // 게시글 작성
     @PostMapping("/write")
-    public String postWrite(final PostRequest params) {
+    public String postWrite(final PostRequest params, Model model) {
         postService.savePost(params);
-        return "redirect:/post/postList";
+        MessageDto message = new MessageDto("야 글 작성 잘됐어", "/post/posts", RequestMethod.GET, null);
+        return showMessageAndRedirect(message, model);
     }
 
     // 게시판 리스트
@@ -56,16 +55,23 @@ public class PostController {
 
     // 게시글 수정
     @PostMapping("/update")
-    public String updatePost(final PostRequest params) {
+    public String updatePost(final PostRequest params, Model model) {
         postService.updatePost(params);
-        return "redirect:/post/postList";
+        MessageDto message = new MessageDto("수정 됐을까?", "/post/posts", RequestMethod.GET, null);
+        return showMessageAndRedirect(message, model);
     }
 
     // 게시글 삭제
     @PostMapping("/delete")
-    public String deletePost(@RequestParam final Long id) {
+    public String deletePost(@RequestParam final Long id, Model model) {
         postService.deletePost(id);
-        return "redirect:/post/postList";
+        MessageDto message = new MessageDto("너글지워짐", "/post/posts", RequestMethod.GET, null);
+        return showMessageAndRedirect(message, model);
     }
 
+    // 메시지 전달 후 redirect
+    private String showMessageAndRedirect(final MessageDto params, Model model) {
+        model.addAttribute("params", params);
+        return "common/messageRedirect";
+    }
 }
