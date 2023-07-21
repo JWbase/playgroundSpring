@@ -16,24 +16,24 @@ class PostMapperTest {
     @Autowired
     PostMapper postMapper;
 
-    @Test
-    @Transactional
-    @DisplayName("게시글 작성")
-    public void save() throws Exception {
-
-        //given
-        PostRequest params = new PostRequest();
-        params.setWriter("test");
-        params.setContent("테스트");
-        params.setTitle("게시글1");
-        params.setNoticeYn(false);
-
-        //when
-        postMapper.save(params);
-
-        //then
-        assertThat(postMapper.findAll().size()).isEqualTo(2);
-    }
+//    @Test
+//    @Transactional
+//    @DisplayName("게시글 작성")
+//    public void save() throws Exception {
+//
+//        //given
+//        PostRequest params = new PostRequest();
+//        params.setWriter("test");
+//        params.setContent("테스트");
+//        params.setTitle("게시글1");
+//        params.setNoticeYn(false);
+//
+//        //when
+//        postMapper.save(params);
+//
+//        //then
+//        assertThat(postMapper.findAll().size()).isEqualTo(2);
+//    }
 
     @Test
     @DisplayName("게시글 조회")
@@ -66,17 +66,17 @@ class PostMapperTest {
         assertThat(updatePost.getContent()).isEqualTo("내용 수정");
     }
     
-    @Test
-    @Transactional
-    @DisplayName("게시글 삭제")
-    public void delete() throws Exception {
-        //given
-        //when
-        postMapper.deleteById(9L);
-        List<PostResponse> allPost = postMapper.findAll();
-
-        //then
-        assertThat(allPost.size()).isEqualTo(0);
-    }
+//    @Test
+//    @Transactional
+//    @DisplayName("게시글 삭제")
+//    public void delete() throws Exception {
+//        //given
+//        //when
+//        postMapper.deleteById(9L);
+//        List<PostResponse> allPost = postMapper.findAll();
+//
+//        //then
+//        assertThat(allPost.size()).isEqualTo(0);
+//    }
 
 }

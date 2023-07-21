@@ -1,7 +1,9 @@
 package com.study.controller;
 
 
-import com.study.common.MessageDto;
+import com.study.common.dto.MessageDto;
+import com.study.common.dto.SearchDto;
+import com.study.common.paging.PagingResponse;
 import com.study.domain.post.PostRequest;
 import com.study.domain.post.PostResponse;
 import com.study.service.PostService;
@@ -39,9 +41,9 @@ public class PostController {
 
     // 게시판 리스트
     @GetMapping("/posts")
-    public String postList(Model model) {
-        List<PostResponse> posts = postService.findAllPost();
-        model.addAttribute("posts", posts);
+    public String postList(@ModelAttribute("params") final SearchDto params, Model model) {
+        PagingResponse<PostResponse> response = postService.findAllPost(params);
+        model.addAttribute("response", response);
         return "post/postList";
     }
 

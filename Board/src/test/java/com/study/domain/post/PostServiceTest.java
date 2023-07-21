@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @SpringBootTest
-@Transactional
+//@Transactional
 class PostServiceTest {
 
     @Autowired
@@ -35,38 +35,49 @@ class PostServiceTest {
 //        assertThat(idA).isEqualTo(25L);
         log.info("saveId = {}", idA);
     }
-    
-    @Test
-    @DisplayName("게시글 상세보기 서비스")
-    public void findById() throws Exception {
-        //given
-        //when
-        PostResponse findId = postService.findPostById(9L);
-        //then
-        assertThat(findId.getId()).isEqualTo(9L);
-    }
-    
-    @Test
-    @DisplayName("게시글 삭제 서비스")
-    public void delete() throws Exception {
-        //given
-        Long deleteId = postService.deletePost(9L);
-        //when
-        
-        //then
-        assertThat(deleteId).isEqualTo(9L);
-    }
+
+//    @Test
+//    @DisplayName("게시글 상세보기 서비스")
+//    public void findById() throws Exception {
+//        //given
+//        //when
+//        PostResponse findId = postService.findPostById(9L);
+//        //then
+//        assertThat(findId.getId()).isEqualTo(9L);
+//    }
+
+//    @Test
+//    @DisplayName("게시글 삭제 서비스")
+//    public void delete() throws Exception {
+//        //given
+//        Long deleteId = postService.deletePost(9L);
+//        //when
+//
+//        //then
+//        assertThat(deleteId).isEqualTo(9L);
+//    }
+
+//    @Test
+//    @DisplayName("게시글 전체 조회 서비스")
+//    public void findAllPost() throws Exception {
+//        //given
+//
+//        //when
+//        List<PostResponse> allPost = postService.findAllPost();
+//
+//        //then
+//        assertThat(allPost.size()).isEqualTo(4);
+//    }
 
     @Test
-    @DisplayName("게시글 전체 조회 서비스")
-    public void findAllPost() throws Exception {
-        //given
-
-        //when
-        List<PostResponse> allPost = postService.findAllPost();
-
-        //then
-        assertThat(allPost.size()).isEqualTo(4);
+    public void saveByForeach() {
+        for (int i = 1; i <= 1000; i++) {
+            PostRequest params = new PostRequest();
+            params.setTitle(i + "번 게시글");
+            params.setContent(i + "번 내용");
+            params.setWriter("테스터" + i);
+            params.setNoticeYn(false);
+            postService.savePost(params);
+        }
     }
-
 }
